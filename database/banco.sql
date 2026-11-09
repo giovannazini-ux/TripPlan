@@ -32,4 +32,3 @@ CREATE TABLE IF NOT EXISTS despesas (
     data DATE,
     FOREIGN KEY (viagem_id) REFERENCES viagens(id)
 );
-
