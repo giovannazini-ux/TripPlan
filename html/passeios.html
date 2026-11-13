@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passeios e atividades | TripPlan</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="index.html">Trip<span>Plan.</span></a>
+    <p class="tagline">Suas viagens, melhor organizadas.</p>
+    <p class="nav-label">Menu principal</p>
+    <nav class="nav"><a class="" href="index.html"><span>⌂</span>Início</a>
+<a class="" href="viagens.html"><span>✈</span>Minhas viagens</a>
+<a class="" href="destinos.html"><span>◎</span>Destinos</a>
+<a class="active" href="passeios.html"><span>▤</span>Passeios</a>
+<a class="" href="despesas.html"><span>R$</span>Despesas</a></nav>
+    <div class="sidebar-bottom">Planeje com calma.<br>Viaje com liberdade.<br><span data-year></span> TripPlan</div>
+  </aside>
+  <main class="main">
+    <div class="topline">
+      <div><p class="eyebrow">Sua programação</p><h1>Passeios e atividades</h1><p class="subtitle">Organize o que você pretende fazer durante cada viagem.</p></div>
+      
+    </div>
+    
+<section class="card form-card">
+  <h2>Novo passeio</h2>
+  <form>
+    <div class="form-grid">
+      <div class="field full"><label for="viagem">Viagem relacionada</label><select id="viagem"><option>Selecione uma viagem</option></select></div>
+      <div class="field"><label for="nome">Nome da atividade</label><input id="nome" type="text" placeholder="Ex.: Visitar um museu"></div>
+      <div class="field"><label for="data">Data do passeio</label><input id="data" type="date"></div>
+      <div class="field full"><label for="descricao">Descrição</label><textarea id="descricao" placeholder="Adicione detalhes, horários ou observações..."></textarea></div>
+    </div>
+    <button class="button" type="button">Salvar passeio</button>
+  </form>
+</section>
+<div class="section-head"><h2>Programação cadastrada</h2></div>
+<section class="card empty"><div class="symbol">▤</div><h3>Nenhum passeio planejado</h3><p class="subtitle">Suas atividades aparecerão aqui depois de cadastradas.</p></section>
+
+  </main>
+  <script src="js/script.js"></script>
+</body>
+</html>

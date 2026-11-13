@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de despesas | TripPlan</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="index.html">Trip<span>Plan.</span></a>
+    <p class="tagline">Suas viagens, melhor organizadas.</p>
+    <p class="nav-label">Menu principal</p>
+    <nav class="nav"><a class="" href="index.html"><span>⌂</span>Início</a>
+<a class="" href="viagens.html"><span>✈</span>Minhas viagens</a>
+<a class="" href="destinos.html"><span>◎</span>Destinos</a>
+<a class="" href="passeios.html"><span>▤</span>Passeios</a>
+<a class="active" href="despesas.html"><span>R$</span>Despesas</a></nav>
+    <div class="sidebar-bottom">Planeje com calma.<br>Viaje com liberdade.<br><span data-year></span> TripPlan</div>
+  </aside>
+  <main class="main">
+    <div class="topline">
+      <div><p class="eyebrow">Seu orçamento</p><h1>Controle de despesas</h1><p class="subtitle">Registre os gastos e acompanhe quanto está investindo na viagem.</p></div>
+      
+    </div>
+    
+<section class="grid">
+  <article class="card"><div class="stat-label">Orçamento disponível</div><div class="stat-value">R$ 0,00</div></article>
+  <article class="card"><div class="stat-label">Total gasto</div><div class="stat-value">R$ 0,00</div></article>
+  <article class="card"><div class="stat-label">Saldo restante</div><div class="stat-value">R$ 0,00</div></article>
+</section>
+<section class="card form-card">
+  <h2>Nova despesa</h2>
+  <form>
+    <div class="form-grid">
+      <div class="field full"><label for="viagem">Viagem relacionada</label><select id="viagem"><option>Selecione uma viagem</option></select></div>
+      <div class="field"><label for="descricao">Descrição do gasto</label><input id="descricao" type="text" placeholder="Ex.: Passagem aérea"></div>
+      <div class="field"><label for="categoria">Categoria</label><select id="categoria"><option>Selecione uma categoria</option><option>Transporte</option><option>Hospedagem</option><option>Alimentação</option><option>Passeios</option><option>Outros</option></select></div>
+      <div class="field"><label for="valor">Valor (R$)</label><input id="valor" type="number" min="0" step="0.01" placeholder="0,00"></div>
+    </div>
+    <button class="button" type="button">Salvar despesa</button>
+  </form>
+</section>
+<div class="notice">O resumo de orçamento será calculado automaticamente quando conectarmos os cadastros ao banco de dados.</div>
+<div class="section-head"><h2>Despesas registradas</h2></div>
+<section class="card empty"><div class="symbol">R$</div><h3>Nenhuma despesa registrada</h3><p class="subtitle">Seus gastos serão listados aqui.</p></section>
+
+  </main>
+  <script src="js/script.js"></script>
+</body>
+</html>

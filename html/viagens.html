@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minhas viagens | TripPlan</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="index.html">Trip<span>Plan.</span></a>
+    <p class="tagline">Suas viagens, melhor organizadas.</p>
+    <p class="nav-label">Menu principal</p>
+    <nav class="nav"><a class="" href="index.html"><span>⌂</span>Início</a>
+<a class="active" href="viagens.html"><span>✈</span>Minhas viagens</a>
+<a class="" href="destinos.html"><span>◎</span>Destinos</a>
+<a class="" href="passeios.html"><span>▤</span>Passeios</a>
+<a class="" href="despesas.html"><span>R$</span>Despesas</a></nav>
+    <div class="sidebar-bottom">Planeje com calma.<br>Viaje com liberdade.<br><span data-year></span> TripPlan</div>
+  </aside>
+  <main class="main">
+    <div class="topline">
+      <div><p class="eyebrow">Planejamento</p><h1>Minhas viagens</h1><p class="subtitle">Cadastre e acompanhe as viagens que você deseja organizar.</p></div>
+      
+    </div>
+    
+<section class="card form-card">
+  <h2>Nova viagem</h2>
+  <form>
+    <div class="form-grid">
+      <div class="field full"><label for="nome">Nome da viagem</label><input id="nome" type="text" placeholder="Ex.: Férias de verão"></div>
+      <div class="field"><label for="destino">Destino principal</label><input id="destino" type="text" placeholder="Ex.: Roma, Itália"></div>
+      <div class="field"><label for="orcamento">Orçamento (R$)</label><input id="orcamento" type="number" min="0" step="0.01" placeholder="0,00"></div>
+      <div class="field"><label for="ida">Data de ida</label><input id="ida" type="date"></div>
+      <div class="field"><label for="volta">Data de volta</label><input id="volta" type="date"></div>
+    </div>
+    <button class="button" type="button">Salvar viagem</button>
+  </form>
+</section>
+<div class="notice">Nesta primeira etapa, a tela está montada como modelo visual. O botão será conectado ao cadastro do Flask e ao SQLite nas próximas etapas.</div>
+<div class="section-head"><h2>Viagens cadastradas</h2></div>
+<section class="card empty"><div class="symbol">＋</div><h3>Nenhuma viagem cadastrada</h3><p class="subtitle">Quando você cadastrar uma viagem, ela aparecerá nesta área.</p></section>
+
+  </main>
+  <script src="js/script.js"></script>
+</body>
+</html>
