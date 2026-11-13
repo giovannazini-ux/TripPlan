@@ -1,0 +1,860 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* CONFIGURAÇÕES GERAIS */
+
+:root {
+    --azul-escuro: #192B3D;
+    --azul: #263B52;
+    --azul-claro: #40566D;
+    --champagne: #C6A878;
+    --champagne-claro: #E5D6B9;
+    --fundo: #F4F1EA;
+    --branco: #FFFFFF;
+    --texto: #293746;
+    --texto-claro: #78818A;
+    --borda: #E8E2D8;
+    --sombra: 0 12px 35px rgba(25, 43, 61, 0.07);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* CABEÇALHO */
+
+header {
+    background: var(--azul-escuro);
+    color: var(--branco);
+    padding: 22px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.logo {
+    color: var(--branco);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--champagne);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+nav a {
+    color: #E5E8EB;
+    font-size: 12px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--champagne);
+}
+
+/* PÁGINAS */
+
+.pagina {
+    width: 90%;
+    max-width: 1200px;
+    margin: 55px auto;
+}
+
+.pagina h1 {
+    color: var(--azul-escuro);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.pagina > p {
+    color: var(--texto-claro);
+    margin-bottom: 35px;
+}
+
+/* CONTAINERS DOS FORMULÁRIOS */
+
+.formulario-container {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 20px;
+    padding: 38px;
+    box-shadow: var(--sombra);
+    margin-bottom: 35px;
+}
+
+.formulario-titulo {
+    margin-bottom: 30px;
+}
+
+.formulario-titulo h2 {
+    color: var(--azul-escuro);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.formulario-titulo p {
+    color: var(--texto-claro);
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* CAMPOS */
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 22px;
+}
+
+.campo label {
+    color: var(--azul-escuro);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    min-height: 52px;
+    padding: 15px 17px;
+    border: 1px solid var(--borda);
+    border-radius: 9px;
+    background: #FCFBF8;
+    color: var(--texto);
+    font-size: 13px;
+    outline: none;
+    transition: 0.25s;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: var(--champagne);
+    background: var(--branco);
+    box-shadow: 0 0 0 3px rgba(198, 168, 120, 0.13);
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: #A3A6A8;
+}
+
+.campo textarea {
+    min-height: 145px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+.campos-linha {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* BOTÕES */
+
+.botao {
+    min-width: 185px;
+    min-height: 54px;
+    padding: 14px 23px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: var(--azul-escuro);
+    border: 1px solid var(--azul-escuro);
+    border-radius: 9px;
+    color: var(--branco);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.botao:hover {
+    background: var(--azul);
+    border-color: var(--champagne);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(25, 43, 61, 0.15);
+}
+
+.botao:active {
+    transform: translateY(0);
+}
+
+.formulario-container .botao {
+    width: auto;
+    max-width: 230px;
+    margin-top: 12px;
+}
+
+/* LISTAS E CADASTROS */
+
+.lista-viagens {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: var(--sombra);
+    margin-top: 35px;
+}
+
+.lista-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.lista-titulo h2 {
+    color: var(--azul-escuro);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 31px;
+    font-weight: 600;
+}
+
+.etiqueta {
+    color: #A88C5D;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* CARDS */
+
+.card-viagem {
+    background: #FCFBF8;
+    border: 1px solid var(--borda);
+    border-left: 4px solid var(--champagne);
+    border-radius: 12px;
+    padding: 23px;
+    margin-bottom: 17px;
+    transition: 0.25s;
+}
+
+.card-viagem:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sombra);
+}
+
+.card-viagem h3 {
+    color: var(--azul-escuro);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.card-viagem p {
+    color: var(--texto-claro);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* ESTADO VAZIO */
+
+.vazio {
+    text-align: center;
+    padding: 45px 20px;
+    color: var(--texto-claro);
+}
+
+.vazio h3 {
+    color: var(--azul-escuro);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.icone-vazio {
+    display: block;
+    color: var(--champagne);
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+/* RODAPÉ */
+
+footer {
+    background: var(--azul-escuro);
+    color: #E5E8EB;
+    padding: 30px 6%;
+    text-align: center;
+    font-size: 11px;
+    margin-top: 60px;
+}
+
+footer span {
+    color: var(--champagne);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .pagina {
+        width: 92%;
+        margin: 35px auto;
+    }
+
+    .pagina h1 {
+        font-size: 35px;
+    }
+
+    .formulario-container,
+    .lista-viagens {
+        padding: 23px;
+        border-radius: 15px;
+    }
+
+    .campos-linha {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .formulario-container .botao {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+
+
+/* =================================
+   PÁGINA INICIAL - TRIPPLAN
+================================= */
+
+main {
+    width: 100%;
+}
+
+/* ÁREA PRINCIPAL */
+
+.hero {
+    width: 90%;
+    max-width: 1250px;
+    min-height: 580px;
+    margin: 55px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 65px;
+}
+
+/* TEXTO PRINCIPAL */
+
+.hero-texto {
+    padding: 25px 0;
+}
+
+.subtitulo {
+    color: #AE8F5D;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.hero-texto h1 {
+    margin: 22px 0;
+    color: #192B3D;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 5vw, 72px);
+    font-weight: 600;
+    line-height: 1.05;
+}
+
+.hero-texto h1 span {
+    color: #B99A69;
+}
+
+.hero-texto > p {
+    max-width: 490px;
+    margin-bottom: 30px;
+    color: #78818A;
+    font-size: 13px;
+    line-height: 2;
+}
+
+/* BOTÃO PRINCIPAL */
+
+.hero-texto .botao {
+    min-width: 220px;
+    padding: 17px 22px;
+    border-radius: 8px;
+    background: #192B3D;
+    color: white;
+}
+
+.hero-texto .botao:hover {
+    background: #C6A878;
+    color: #192B3D;
+}
+
+.informacao {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 45px;
+}
+
+.informacao span {
+    color: #B99A69;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+}
+
+.informacao p {
+    color: #78818A;
+    font-size: 11px;
+}
+
+/* ÁREA VISUAL */
+
+.hero-visual {
+    min-height: 470px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 18px;
+    background:
+        radial-gradient(circle at 50% 45%, #52677A 0%, #30475E 38%, #192B3D 85%);
+    box-shadow: 0 20px 50px rgba(25, 43, 61, 0.17);
+    color: white;
+}
+
+.visual-topo,
+.visual-rodape {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    color: #E5D6B9;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.visual-topo span:last-child {
+    color: #D6B77F;
+    font-size: 18px;
+}
+
+/* GLOBO DECORATIVO */
+
+.circulo {
+    width: 285px;
+    height: 285px;
+    max-width: 80%;
+    aspect-ratio: 1;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(229, 214, 185, 0.55);
+    border-radius: 50%;
+    background:
+        radial-gradient(ellipse at 35% 30%,
+        rgba(229, 214, 185, 0.25),
+        rgba(198, 168, 120, 0.05) 65%,
+        transparent 70%);
+    box-shadow:
+        0 0 0 18px rgba(229, 214, 185, 0.04),
+        0 0 0 38px rgba(229, 214, 185, 0.03);
+}
+
+.circulo-interno {
+    width: 75%;
+    height: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(229, 214, 185, 0.6);
+    border-radius: 50%;
+}
+
+.circulo-interno span {
+    color: #E5D6B9;
+    font-size: 65px;
+    transform: rotate(-15deg);
+}
+
+/* CARTÃO SOBRE O GLOBO */
+
+.cartao-viagem {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid rgba(229, 214, 185, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.09);
+    backdrop-filter: blur(8px);
+}
+
+.cartao-viagem .etiqueta {
+    color: #D6B77F;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.cartao-viagem h2 {
+    margin-top: 8px;
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    line-height: 1.1;
+}
+
+.cartao-viagem .seta {
+    color: #E5D6B9;
+    font-size: 28px;
+}
+
+/* CARDS DE DESTAQUE */
+
+.destaques {
+    width: 90%;
+    max-width: 1250px;
+    margin: 80px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.destaques > div {
+    padding: 30px;
+    border: 1px solid #E8E2D8;
+    border-radius: 14px;
+    background: white;
+    transition: 0.3s ease;
+}
+
+.destaques > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(25, 43, 61, 0.09);
+    border-color: #C6A878;
+}
+
+.destaques > div > span {
+    color: #B99A69;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.destaques h3 {
+    margin: 15px 0 8px;
+    color: #192B3D;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+}
+
+.destaques p {
+    color: #78818A;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* RODAPÉ */
+
+footer {
+    padding: 35px 20px;
+    background: #192B3D;
+    text-align: center;
+}
+
+footer > span {
+    color: #D6B77F;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+}
+
+footer p {
+    color: #E5E8EB;
+    font-size: 11px;
+}
+
+/* CELULARES E TABLETS */
+
+@media (max-width: 850px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        margin: 35px auto;
+    }
+
+    .hero-visual {
+        min-height: 430px;
+    }
+
+    .destaques {
+        grid-template-columns: 1fr;
+        margin: 45px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-texto h1 {
+        font-size: 48px;
+    }
+
+    .hero-visual {
+        min-height: 390px;
+        padding: 20px;
+    }
+
+    .circulo {
+        width: 220px;
+    }
+
+    .cartao-viagem h2 {
+        font-size: 26px;
+    }
+}
+
+
+
+/* ===== PÁGINA EXPLORAR ===== */
+
+.explorar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 30px;
+}
+
+.explorar-hero {
+    background: linear-gradient(120deg, #192B3D, #314B64);
+    padding: 65px 50px;
+    border-radius: 18px;
+    color: white;
+    margin-bottom: 55px;
+}
+
+.explorar-etiqueta {
+    color: #C6A878;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.explorar-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    margin: 15px 0;
+}
+
+.explorar-hero h1 span {
+    color: #C6A878;
+}
+
+.explorar-hero p {
+    max-width: 550px;
+    line-height: 1.8;
+    color: #E5D6B9;
+}
+
+.explorar-categorias,
+.destinos-sugeridos {
+    margin-bottom: 55px;
+}
+
+.explorar-categorias h2,
+.destinos-sugeridos h2 {
+    color: #192B3D;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    margin: 12px 0 25px;
+}
+
+.categorias-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.categoria-card {
+    background: white;
+    padding: 25px 20px;
+    border: 1px solid #E5D6B9;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.categoria-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(25, 43, 61, 0.10);
+}
+
+.categoria-card span {
+    font-size: 30px;
+}
+
+.categoria-card h3 {
+    color: #192B3D;
+    margin: 15px 0 7px;
+    font-size: 16px;
+}
+
+.categoria-card p {
+    color: #777;
+    font-size: 13px;
+}
+
+.destinos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.destino-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #E8E2D8;
+    transition: 0.3s;
+}
+
+.destino-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(25, 43, 61, 0.12);
+}
+
+.destino-imagem {
+    height: 180px;
+    display: flex;
+    align-items: end;
+    padding: 18px;
+    background: linear-gradient(135deg, #263B52, #607C91);
+}
+
+.destino-imagem span {
+    color: white;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.destino-imagem.maldivas {
+    background: linear-gradient(135deg, #397E91, #A6C9C5);
+}
+
+.destino-imagem.roma {
+    background: linear-gradient(135deg, #805D46, #C6A878);
+}
+
+.destino-imagem.bali {
+    background: linear-gradient(135deg, #315C4B, #9CB59A);
+}
+
+.destino-imagem.paris {
+    background: linear-gradient(135deg, #454B65, #A7A4B4);
+}
+
+.destino-imagem.toquio {
+    background: linear-gradient(135deg, #853F50, #D59B9B);
+}
+
+.destino-imagem.suica {
+    background: linear-gradient(135deg, #526C80, #B2C4C8);
+}
+
+.destino-conteudo {
+    padding: 22px;
+}
+
+.destino-conteudo small {
+    color: #B18D55;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.destino-conteudo h3 {
+    color: #192B3D;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.destino-conteudo p {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+@media (max-width: 850px) {
+    .categorias-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .destinos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .explorar-container {
+        padding: 25px 15px;
+    }
+
+    .explorar-hero {
+        padding: 40px 25px;
+    }
+
+    .explorar-hero h1 {
+        font-size: 36px;
+    }
+
+    .categorias-grid,
+    .destinos-grid {
+        grid-template-columns: 1fr;
+    }
+}

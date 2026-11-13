@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripPlan | Destinos</title>
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Trip<span>Plan.</span></div>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/viagens">Minhas viagens</a>
+            <a href="/destinos" class="ativo">Destinos</a>
+            <a href="/passeios">Passeios</a>
+            <a href="/despesas">Despesas</a>
+        </nav>
+    </header>
+
+    <main class="pagina">
+
+        <section class="titulo-pagina">
+            <span class="subtitulo">LUGARES PARA DESCOBRIR</span>
+            <h1>Meus destinos<span>.</span></h1>
+            <p>Registre os lugares que fazem parte das suas próximas aventuras.</p>
+        </section>
+
+        <section class="formulario-container">
+
+            <div class="formulario-titulo">
+                <div>
+                    <span class="etiqueta">NOVO LUGAR</span>
+                    <h2>Cadastrar destino</h2>
+                </div>
+                <span class="numero">01 / 01</span>
+            </div>
+
+            <form id="formDestino">
+
+                <div class="campos-linha">
+                    <div class="campo">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" id="cidade" placeholder="Ex: Roma" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="pais">País</label>
+                        <input type="text" id="pais" placeholder="Ex: Itália" required>
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <label for="viagem">Viagem relacionada</label>
+                    <select id="viagem" required>
+                        <option value="">Selecione uma viagem</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="descricao">Descrição do destino</label>
+                    <textarea id="descricao" rows="5" placeholder="Conte um pouco sobre esse destino..."></textarea>
+                </div>
+
+                <button type="submit" class="botao">
+                    Salvar destino <span>→</span>
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="lista-viagens">
+
+            <div class="lista-titulo">
+                <div>
+                    <span class="etiqueta">LUGARES PLANEJADOS</span>
+                    <h2>Destinos cadastrados</h2>
+                </div>
+            </div>
+
+            <div class="vazio">
+                <span class="icone-vazio">⌖</span>
+                <h3>Nenhum destino cadastrado</h3>
+                <p>Seus destinos aparecerão aqui depois de cadastrados.</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <span>TripPlan.</span>
+        <p>Sistema de Planejamento e Organização de Viagens</p>
+    </footer>
+    
+<script src="/script/script.js"></script>
+
+</body>
+</html>

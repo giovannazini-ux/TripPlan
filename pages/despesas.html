@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripPlan | Despesas</title>
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Trip<span>Plan.</span></div>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/viagens">Minhas viagens</a>
+            <a href="/destinos">Destinos</a>
+            <a href="/passeios">Passeios</a>
+            <a href="/despesas" class="ativo">Despesas</a>
+           <a href="/explorar">Explorar</a>
+        </nav>
+    </header>
+
+    <main class="pagina">
+
+        <section class="titulo-pagina">
+            <span class="subtitulo">CONTROLE FINANCEIRO</span>
+            <h1>Minhas despesas<span>.</span></h1>
+            <p>Organize seus gastos e acompanhe o orçamento das suas viagens.</p>
+        </section>
+
+        <section class="formulario-container">
+
+            <div class="formulario-titulo">
+                <div>
+                    <span class="etiqueta">NOVO GASTO</span>
+                    <h2>Cadastrar despesa</h2>
+                </div>
+                <span class="numero">01 / 01</span>
+            </div>
+
+            <form id="formDespesa">
+
+                <div class="campo">
+                    <label for="descricaoDespesa">Descrição da despesa</label>
+                    <input type="text" id="descricaoDespesa"
+                        placeholder="Ex: Passagem de avião" required>
+                </div>
+
+                <div class="campos-linha">
+
+                    <div class="campo">
+                        <label for="categoriaDespesa">Categoria</label>
+                        <select id="categoriaDespesa" required>
+                            <option value="">Selecione uma categoria</option>
+                            <option value="Transporte">Transporte</option>
+                            <option value="Hospedagem">Hospedagem</option>
+                            <option value="Alimentação">Alimentação</option>
+                            <option value="Passeios">Passeios</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="valorDespesa">Valor (R$)</label>
+                        <input type="number" id="valorDespesa"
+                            placeholder="Ex: 250.00" min="0.01" step="0.01" required>
+                    </div>
+
+                </div>
+
+                <div class="campo">
+                    <label for="viagemDespesa">Viagem relacionada</label>
+                    <select id="viagemDespesa" required>
+                        <option value="">Selecione uma viagem</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="botao">
+                    Salvar despesa <span>→</span>
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="lista-viagens">
+
+            <div class="lista-titulo">
+                <div>
+                    <span class="etiqueta">SEUS GASTOS</span>
+                    <h2>Despesas cadastradas</h2>
+                </div>
+            </div>
+
+            <div class="vazio">
+                <h3>Nenhuma despesa cadastrada</h3>
+                <p>Seus gastos aparecerão aqui depois de cadastrados.</p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <span>TripPlan.</span>
+        <p>Sistema de Planejamento e Organização de Viagens</p>
+    </footer>
+
+    <script src="/script/script.js"></script>
+
+</body>
+</html>
