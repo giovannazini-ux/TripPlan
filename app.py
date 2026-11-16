@@ -1,8 +1,9 @@
+import argparse
 import sqlite3
 
 from flask import Flask, jsonify, render_template, request, url_for
 
-from dao.banco import CAMINHO_BANCO, preparar_banco
+from dao.banco import CAMINHO_BANCO, CAMINHO_DEMO, popular_demonstracao, preparar_banco
 from dao.despesa_dao import DespesaDAO
 from dao.destino_dao import DestinoDAO
 from dao.passeio_dao import PasseioDAO
@@ -20,7 +21,7 @@ PAGINAS = {
 }
 
 
-def renderizar_pagina(pagina, *, online=False):
+def renderizar_pagina(pagina, *, online=False, demo_local=False):
     def link_pagina(destino):
         if online:
             return "./" + PAGINAS[destino][0]
@@ -38,12 +39,17 @@ def renderizar_pagina(pagina, *, online=False):
         link_pagina=link_pagina,
         link_arquivo=link_arquivo,
         online=online,
+        demo_local=demo_local,
         api_url="" if online else url_for("status_api"),
     )
 
 
-def create_app(caminho_banco=CAMINHO_BANCO):
+def create_app(caminho_banco=None, *, demonstracao=False):
+    if caminho_banco is None:
+        caminho_banco = CAMINHO_DEMO if demonstracao else CAMINHO_BANCO
     preparar_banco(caminho_banco)
+    if demonstracao:
+        popular_demonstracao(caminho_banco)
     app = Flask(__name__)
     colecoes = {
         "viagens": (ViagemDAO(caminho_banco), montar_viagem),
@@ -55,7 +61,7 @@ def create_app(caminho_banco=CAMINHO_BANCO):
     @app.get("/", defaults={"nome": "inicio"})
     @app.get("/<any(explorar,viagens,destinos,passeios,despesas):nome>")
     def pagina(nome):
-        return renderizar_pagina(nome)
+        return renderizar_pagina(nome, demo_local=demonstracao)
 
     @app.get("/api")
     def status_api():
@@ -102,4 +108,7 @@ def create_app(caminho_banco=CAMINHO_BANCO):
 
 
 if __name__ == "__main__":
-    create_app().run()
+    parser = argparse.ArgumentParser(description="Inicia o TripPlan.")
+    parser.add_argument("--demo", action="store_true", help="Abre o banco com exemplos fictícios.")
+    argumentos = parser.parse_args()
+    create_app(demonstracao=argumentos.demo).run()

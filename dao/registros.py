@@ -1,6 +1,6 @@
 from dataclasses import asdict
 
-from dao.banco import CAMINHO_BANCO, conectar
+from dao.banco import CAMINHO_BANCO, conectar, inserir_registro
 
 
 class RegistroDAO:
@@ -12,12 +12,8 @@ class RegistroDAO:
             return [dict(linha) for linha in conexao.execute(self.consulta)]
 
     def cadastrar(self, registro):
-        dados = asdict(registro)
-        colunas = ", ".join(dados)
-        parametros = ", ".join("?" for _ in dados)
-        comando = f"INSERT INTO {self.tabela} ({colunas}) VALUES ({parametros})"
         with conectar(self.caminho) as conexao:
-            return conexao.execute(comando, tuple(dados.values())).lastrowid
+            return inserir_registro(conexao, self.tabela, asdict(registro))
 
     def editar(self, id_registro, registro):
         dados = asdict(registro)

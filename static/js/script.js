@@ -1,3 +1,5 @@
+import { requisitarDemo } from "./pages.js";
+
 const moeda = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
 const colecoes = {
@@ -46,6 +48,9 @@ function formatarData(data) {
 }
 
 async function requisitar(colecao, metodo = "GET", id = null, dados = null) {
+    if (document.body.hasAttribute("data-demo")) {
+        return requisitarDemo(colecao, metodo, id, dados);
+    }
     const rota = document.body.dataset.api + "/" + colecao + (id === null ? "" : "/" + id);
     const opcoes = { method: metodo };
     if (dados !== null) {

@@ -5,8 +5,9 @@ import sqlite3
 from tempfile import TemporaryDirectory
 import unittest
 
-from app import create_app
+from app import PAGINAS, create_app
 from dao.banco import CAMINHO_BANCO
+from gerar_pages import gerar_pages
 
 
 VIAGEM = {
@@ -58,10 +59,8 @@ class TripPlanTest(unittest.TestCase):
                 self.assertEqual(resposta.status_code, 201)
                 ids[colecao] = resposta.json["id"]
                 registro_url = f"{rota}/{ids[colecao]}"
-                self.assertEqual(
-                    self.client.put(registro_url, json={**dados, "id_viagem": id_viagem, "descricao": "Revisado"}).status_code,
-                    200,
-                )
+                edicao = {**dados, "id_viagem": id_viagem, "descricao": "Revisado"}
+                self.assertEqual(self.client.put(registro_url, json=edicao).status_code, 200)
                 registro = self.client.get(rota).json[0]
                 self.assertEqual(registro["nome_viagem"], "Viagem editada")
                 self.assertEqual(registro["descricao"], "Revisado")
@@ -103,9 +102,31 @@ class TripPlanTest(unittest.TestCase):
             conexao.row_factory = sqlite3.Row
             for tabela in ("viagens", "destinos", "passeios", "despesas"):
                 with self.subTest(tabela=tabela):
-                    chave = client.get(f"/api/{tabela}").json
+                    registros = client.get(f"/api/{tabela}").json
                     linhas = conexao.execute(f"SELECT * FROM {tabela} ORDER BY 1 DESC")
                     esperado = [dict(linha) for linha in linhas]
-                    self.assertEqual(len(chave), len(esperado))
-                    for novo, anterior in zip(chave, esperado):
+                    self.assertEqual(len(registros), len(esperado))
+                    for novo, anterior in zip(registros, esperado):
                         self.assertEqual({campo: novo[campo] for campo in anterior}, anterior)
+
+    def test_demonstracao_carrega_exemplos_so_uma_vez(self):
+        banco_demo = self.banco.with_name("demo.db")
+        demo = create_app(banco_demo, demonstracao=True).test_client()
+        viagens = {viagem["id_viagem"]: viagem for viagem in demo.get("/api/viagens").json}
+        self.assertEqual(viagens[1]["total_despesas"], 900)
+        self.assertEqual(demo.delete("/api/despesas/1").status_code, 200)
+        demo_reaberto = create_app(banco_demo, demonstracao=True).test_client()
+        self.assertEqual(len(demo_reaberto.get("/api/despesas").json), 1)
+        self.assertEqual(self.client.get("/api/viagens").json, [])
+
+    def test_gera_site_para_o_subdiretorio_do_repositorio(self):
+        saida = self.banco.parent / "site"
+        gerar_pages(saida)
+        for arquivo, _ in PAGINAS.values():
+            with self.subTest(arquivo=arquivo):
+                pagina = (saida / arquivo).read_text(encoding="utf-8")
+                self.assertIn('href="./viagens.html"', pagina)
+                self.assertIn('src="./static/js/script.js"', pagina)
+                self.assertIn("data-demo", pagina)
+        self.assertTrue((saida / "dados" / "demonstracao.json").is_file())
+        self.assertTrue((saida / "static" / "js" / "pages.js").is_file())
