@@ -1,0 +1,21 @@
+{% extends "cadastros.html" %}
+{% set titulo = "Meus passeios" %}
+{% set descricao_pagina = "Planeje as atividades de cada viagem." %}
+{% set novo = "Novo passeio" %}
+{% set edicao = "Editar passeio" %}
+{% set cadastrar = "Cadastrar passeio" %}
+{% set titulo_lista = "Passeios cadastrados" %}
+{% set vazio = "Nenhum passeio cadastrado." %}
+
+{% block campos %}
+<label for="nomePasseio">Nome do passeio</label>
+<input type="text" id="nomePasseio" name="nome" required placeholder="Ex.: Visita ao Coliseu">
+
+<label for="dataPasseio">Data</label>
+<input type="date" id="dataPasseio" name="data" required>
+
+{{ selecionar_viagem("viagemPasseio") }}
+
+<label for="descricaoPasseio">Descrição</label>
+<textarea id="descricaoPasseio" name="descricao" placeholder="Detalhes do passeio"></textarea>
+{% endblock %}

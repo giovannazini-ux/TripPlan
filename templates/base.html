@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripPlan | {{ paginas[pagina][1] }}</title>
+    <link rel="stylesheet" href="{{ link_arquivo('css/style.css') }}">
+    <script type="module" src="{{ link_arquivo('js/script.js') }}"></script>
+</head>
+<body data-api="{{ api_url }}"{% if online %} data-demo{% endif %}>
+<header>
+    <a class="logo" href="{{ link_pagina('inicio') }}">Trip<span>Plan.</span></a>
+    <nav aria-label="Navegação principal">
+        {% for nome, (arquivo, rotulo) in paginas.items() %}
+        <a href="{{ link_pagina(nome) }}"{% if nome == pagina %} class="ativo" aria-current="page"{% endif %}>{{ rotulo }}</a>
+        {% endfor %}
+    </nav>
+</header>
+{% if online %}
+<p class="aviso-demo">Demonstração com dados fictícios. Suas alterações ficam neste navegador.</p>
+{% elif demo_local %}
+<p class="aviso-demo">Demonstração com dados fictícios. Suas alterações ficam no banco de demonstração.</p>
+{% endif %}
+{% block conteudo %}{% endblock %}
+<footer><p>TripPlan — Organize suas viagens do seu jeito.</p></footer>
+</body>
+</html>

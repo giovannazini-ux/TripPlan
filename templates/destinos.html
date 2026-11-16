@@ -1,0 +1,21 @@
+{% extends "cadastros.html" %}
+{% set titulo = "Meus destinos" %}
+{% set descricao_pagina = "Adicione as cidades e os países que fazem parte das suas viagens." %}
+{% set novo = "Novo destino" %}
+{% set edicao = "Editar destino" %}
+{% set cadastrar = "Cadastrar destino" %}
+{% set titulo_lista = "Destinos cadastrados" %}
+{% set vazio = "Nenhum destino cadastrado." %}
+
+{% block campos %}
+<label for="cidade">Cidade</label>
+<input type="text" id="cidade" name="cidade" required placeholder="Ex.: Roma">
+
+<label for="pais">País</label>
+<input type="text" id="pais" name="pais" required placeholder="Ex.: Itália">
+
+{{ selecionar_viagem("viagem") }}
+
+<label for="descricao">Descrição</label>
+<textarea id="descricao" name="descricao" placeholder="Informações sobre o destino"></textarea>
+{% endblock %}

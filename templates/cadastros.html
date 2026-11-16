@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% macro selecionar_viagem(id) %}
+<label for="{{ id }}">Viagem relacionada</label>
+<select id="{{ id }}" name="id_viagem" required>
+    <option value="">Carregando viagens…</option>
+</select>
+<p id="aviso-sem-viagem" class="status-form" hidden>
+    <a href="{{ link_pagina('viagens') }}">Cadastre uma viagem</a> para vincular este registro.
+</p>
+{% endmacro %}
+
+{% block conteudo %}
+<main class="pagina-container">
+    <section class="pagina-intro">
+        <h1>{{ titulo }}</h1>
+        <p>{{ descricao_pagina }}</p>
+    </section>
+
+    <section class="formulario-container" aria-labelledby="titulo-formulario">
+        <h2 id="titulo-formulario" data-novo="{{ novo }}" data-edicao="{{ edicao }}">{{ novo }}</h2>
+        <form id="formulario-registro" data-colecao="{{ pagina }}">
+            {% block campos %}{% endblock %}
+            <div class="acoes-registro">
+                <button class="botao-principal" type="submit" data-cadastrar="{{ cadastrar }}" disabled>{{ cadastrar }}</button>
+                <button class="botao-acao" type="button" id="cancelar-edicao" hidden>Cancelar edição</button>
+            </div>
+        </form>
+        <p class="status-form" id="mensagem-formulario" role="status"></p>
+        <noscript><p>Ative o JavaScript para usar os cadastros.</p></noscript>
+    </section>
+
+    <section class="lista-viagens" aria-labelledby="titulo-lista">
+        <div class="lista-titulo"><h2 id="titulo-lista">{{ titulo_lista }}</h2></div>
+        <p class="vazio" id="estado-lista" data-vazio="{{ vazio }}" role="status">Carregando…</p>
+        <div id="registros"></div>
+    </section>
+</main>
+{% endblock %}
