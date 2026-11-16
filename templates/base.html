@@ -16,11 +16,6 @@
         {% endfor %}
     </nav>
 </header>
-{% if online %}
-<p class="aviso-demo">Demonstração com dados fictícios. Suas alterações ficam neste navegador.</p>
-{% elif demo_local %}
-<p class="aviso-demo">Demonstração com dados fictícios. Suas alterações ficam no banco de demonstração.</p>
-{% endif %}
 {% block conteudo %}{% endblock %}
 <footer><p>TripPlan — Organize suas viagens do seu jeito.</p></footer>
 </body>

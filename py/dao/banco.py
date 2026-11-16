@@ -4,7 +4,7 @@ from pathlib import Path
 import sqlite3
 
 
-PASTA_BANCO = Path(__file__).resolve().parents[1] / "database"
+PASTA_BANCO = Path(__file__).resolve().parents[2] / "database"
 CAMINHO_BANCO = PASTA_BANCO / "tripplan.db"
 CAMINHO_DEMO = PASTA_BANCO / "tripplan-demo.db"
 DADOS_DEMO = PASTA_BANCO / "demonstracao.json"

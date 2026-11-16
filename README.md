@@ -9,15 +9,15 @@ O TripPlan reúne o planejamento de viagens, destinos, passeios e despesas. Em *
 Use Python 3.11 ou superior. Abra o terminal na pasta do TripPlan e execute os dois comandos abaixo.
 
 ```powershell
-python -m pip install -r requirements.txt
-python app.py
+python -m pip install -r py/requirements.txt
+python py/app.py
 ```
 
 Abra [o TripPlan no navegador](http://127.0.0.1:5000/). Os formulários chamam o Flask via Fetch, e os dados são gravados em `database/tripplan.db`. Se o arquivo estiver ausente, o Flask o cria usando [o esquema SQLite](database/banco.sql).
 
 ## Apresentação
 
-Para abrir o sistema com exemplos fictícios, execute `python app.py --demo`. As alterações desse modo são gravadas em `database/tripplan-demo.db`.
+Para abrir o sistema com exemplos fictícios, execute `python py/app.py --demo`. As alterações desse modo são gravadas em `database/tripplan-demo.db`.
 
 1. Em **Minhas viagens**, localize o roteiro pela Serra Gaúcha. Ele tem orçamento de **R$ 3.200,00**, total gasto de **R$ 900,00** e saldo de **R$ 2.300,00**.
 2. Em **Despesas**, cadastre **R$ 100,00** de alimentação para esse roteiro.
@@ -36,12 +36,13 @@ A [demonstração no GitHub Pages](https://giovannazini-ux.github.io/TripPlan/) 
 
 | Arquivo ou pasta | Responsabilidade |
 |---|---|
-| [app.py](app.py) | Rotas das páginas e da API Flask |
-| [models.py](models.py) | Classes Viagem, Destino, Passeio e Despesa |
-| [validacao.py](validacao.py) | Validação dos formulários e criação dos objetos |
-| [dao/](dao/) | Consultas, gravação e conexão com SQLite |
+| [index.html](index.html) | Página inicial do TripPlan |
+| [py/app.py](py/app.py) | Rotas das páginas e da API Flask |
+| [py/models.py](py/models.py) | Classes Viagem, Destino, Passeio e Despesa |
+| [py/validacao.py](py/validacao.py) | Validação dos formulários e criação dos objetos |
+| [py/dao/](py/dao/) | Consultas, gravação e conexão com SQLite |
 | [templates/](templates/) e [static/](static/) | HTML, CSS e JavaScript da interface |
-| [gerar_pages.py](gerar_pages.py) | Geração dos arquivos estáticos da demonstração no GitHub Pages |
+| [py/gerar_pages.py](py/gerar_pages.py) | Geração dos arquivos estáticos da demonstração no GitHub Pages |
 
 ## API
 
@@ -58,7 +59,7 @@ A rota de viagens inclui `total_despesas`. As chaves estrangeiras exigem que des
 
 ## Verificação e publicação
 
-Execute os testes com `python -m unittest discover -s tests -v`. O arquivo de publicação em [GitHub Actions](.github/workflows/jekyll-gh-pages.yml) executa os testes e monta a demonstração a partir dos mesmos templates. A origem da publicação fica em **Settings → Pages → Source → GitHub Actions**.
+Execute os testes com `python -m unittest discover -s py/tests -t py -v`. O arquivo de publicação em [GitHub Actions](.github/workflows/jekyll-gh-pages.yml) executa os testes e monta a demonstração a partir do `index.html` e dos templates. A origem da publicação fica em **Settings → Pages → Source → GitHub Actions**.
 
 ## Desenvolvedora
 
