@@ -3,19 +3,18 @@ import shutil
 
 from flask import Flask
 
-from app import PAGINAS, renderizar_pagina
+from app import PAGINAS, RAIZ, renderizar_pagina
 from dao.banco import DADOS_DEMO
 
 
-RAIZ = Path(__file__).resolve().parent
-
-
-def gerar_pages(saida=RAIZ / "_site"):
+def gerar_pages(saida=Path(__file__).resolve().parent / "_site"):
     saida.mkdir(parents=True, exist_ok=True)
-    app = Flask(__name__)
+    shutil.copyfile(RAIZ / "index.html", saida / "index.html")
+    app = Flask(__name__, template_folder=RAIZ / "templates")
     with app.app_context():
         for pagina, (arquivo, _) in PAGINAS.items():
-            (saida / arquivo).write_text(renderizar_pagina(pagina, online=True), encoding="utf-8")
+            if pagina != "inicio":
+                (saida / arquivo).write_text(renderizar_pagina(pagina, online=True), encoding="utf-8")
 
     shutil.copytree(RAIZ / "static", saida / "static", dirs_exist_ok=True)
     pasta_dados = saida / "dados"

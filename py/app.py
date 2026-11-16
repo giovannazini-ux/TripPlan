@@ -1,7 +1,8 @@
 import argparse
+from pathlib import Path
 import sqlite3
 
-from flask import Flask, jsonify, render_template, request, url_for
+from flask import Flask, jsonify, render_template, request, send_file, url_for
 
 from dao.banco import CAMINHO_BANCO, CAMINHO_DEMO, popular_demonstracao, preparar_banco
 from dao.despesa_dao import DespesaDAO
@@ -10,6 +11,8 @@ from dao.passeio_dao import PasseioDAO
 from dao.viagem_dao import ViagemDAO
 from validacao import montar_despesa, montar_destino, montar_passeio, montar_viagem
 
+
+RAIZ = Path(__file__).resolve().parents[1]
 
 PAGINAS = {
     "inicio": ("index.html", "Início"),
@@ -21,10 +24,12 @@ PAGINAS = {
 }
 
 
-def renderizar_pagina(pagina, *, online=False, demo_local=False):
+def renderizar_pagina(pagina, *, online=False):
     def link_pagina(destino):
         if online:
             return "./" + PAGINAS[destino][0]
+        if destino == "inicio":
+            return url_for("inicio")
         return url_for("pagina", nome=destino)
 
     def link_arquivo(caminho):
@@ -39,7 +44,6 @@ def renderizar_pagina(pagina, *, online=False, demo_local=False):
         link_pagina=link_pagina,
         link_arquivo=link_arquivo,
         online=online,
-        demo_local=demo_local,
         api_url="" if online else url_for("status_api"),
     )
 
@@ -50,7 +54,7 @@ def create_app(caminho_banco=None, *, demonstracao=False):
     preparar_banco(caminho_banco)
     if demonstracao:
         popular_demonstracao(caminho_banco)
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder=RAIZ / "templates", static_folder=RAIZ / "static")
     colecoes = {
         "viagens": (ViagemDAO(caminho_banco), montar_viagem),
         "destinos": (DestinoDAO(caminho_banco), montar_destino),
@@ -58,10 +62,18 @@ def create_app(caminho_banco=None, *, demonstracao=False):
         "despesas": (DespesaDAO(caminho_banco), montar_despesa),
     }
 
-    @app.get("/", defaults={"nome": "inicio"})
-    @app.get("/<any(explorar,viagens,destinos,passeios,despesas):nome>")
+    @app.get("/index.html")
+    @app.get("/")
+    def inicio():
+        return send_file(RAIZ / "index.html")
+
+    nomes_paginas = ",".join(nome for nome in PAGINAS if nome != "inicio")
+    rota_paginas = f"/<any({nomes_paginas}):nome>"
+
+    @app.get(rota_paginas + ".html")
+    @app.get(rota_paginas)
     def pagina(nome):
-        return renderizar_pagina(nome, demo_local=demonstracao)
+        return renderizar_pagina(nome)
 
     @app.get("/api")
     def status_api():

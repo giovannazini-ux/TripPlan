@@ -2,5 +2,3 @@ __pycache__/
 *.py[cod]
 .venv/
 _site/
-database/*.db
-database/*.db-*

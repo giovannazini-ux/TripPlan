@@ -1,13 +1,30 @@
-{% extends "base.html" %}
-
-{% block conteudo %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripPlan | Início</title>
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body>
+<header>
+    <a class="logo" href="./index.html">Trip<span>Plan.</span></a>
+    <nav aria-label="Navegação principal">
+        <a href="./index.html" class="ativo" aria-current="page">Início</a>
+        <a href="./explorar.html">Explorar</a>
+        <a href="./viagens.html">Minhas viagens</a>
+        <a href="./destinos.html">Destinos</a>
+        <a href="./passeios.html">Passeios</a>
+        <a href="./despesas.html">Despesas</a>
+    </nav>
+</header>
 <main>
     <section class="hero">
         <div class="hero-texto">
             <span class="etiqueta">SUA PRÓXIMA AVENTURA COMEÇA AQUI</span>
             <h1>Viajar é viver histórias. <span>Organize cada uma delas.</span></h1>
             <p>Planeje seus destinos, organize seus passeios e acompanhe seus gastos em um só lugar.</p>
-            <a href="{{ link_pagina('viagens') }}" class="botao-principal">Organizar minha viagem</a>
+            <a href="./viagens.html" class="botao-principal">Organizar minha viagem</a>
         </div>
 
         <div class="hero-visual">
@@ -31,31 +48,31 @@
         </div>
 
         <div class="destaques-grid">
-            <a href="{{ link_pagina('explorar') }}" class="destaque-card">
+            <a href="./explorar.html" class="destaque-card">
                 <span>⌕</span>
                 <h3>Explorar destinos</h3>
                 <p>Encontre inspiração para sua próxima viagem.</p>
             </a>
 
-            <a href="{{ link_pagina('viagens') }}" class="destaque-card">
+            <a href="./viagens.html" class="destaque-card">
                 <span>✈</span>
                 <h3>Minhas viagens</h3>
                 <p>Cadastre e acompanhe seus planos.</p>
             </a>
 
-            <a href="{{ link_pagina('destinos') }}" class="destaque-card">
+            <a href="./destinos.html" class="destaque-card">
                 <span>⌖</span>
                 <h3>Destinos</h3>
                 <p>Organize as cidades que deseja conhecer.</p>
             </a>
 
-            <a href="{{ link_pagina('passeios') }}" class="destaque-card">
+            <a href="./passeios.html" class="destaque-card">
                 <span>◇</span>
                 <h3>Passeios</h3>
                 <p>Registre atividades e experiências.</p>
             </a>
 
-            <a href="{{ link_pagina('despesas') }}" class="destaque-card">
+            <a href="./despesas.html" class="destaque-card">
                 <span>R$</span>
                 <h3>Despesas</h3>
                 <p>Controle os gastos da sua viagem.</p>
@@ -63,4 +80,6 @@
         </div>
     </section>
 </main>
-{% endblock %}
+<footer><p>TripPlan — Organize suas viagens do seu jeito.</p></footer>
+</body>
+</html>

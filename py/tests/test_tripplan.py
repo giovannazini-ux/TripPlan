@@ -5,7 +5,7 @@ import sqlite3
 from tempfile import TemporaryDirectory
 import unittest
 
-from app import PAGINAS, create_app
+from app import PAGINAS, RAIZ, create_app
 from dao.banco import CAMINHO_BANCO
 from gerar_pages import gerar_pages
 
@@ -27,12 +27,22 @@ class TripPlanTest(unittest.TestCase):
         self.client = create_app(self.banco).test_client()
 
     def test_paginas_e_arquivos_estaticos(self):
-        for rota in ("/", "/explorar", "/viagens", "/destinos", "/passeios", "/despesas"):
-            with self.subTest(rota=rota):
-                resposta = self.client.get(rota)
+        index = (RAIZ / "index.html").read_bytes()
+        for rota in ("/", "/index.html"):
+            with self.subTest(rota=rota), self.client.get(rota) as resposta:
                 self.assertEqual(resposta.status_code, 200)
-                self.assertIn(b'data-api="/api"', resposta.data)
-                self.assertIn(b'src="/static/js/script.js"', resposta.data)
+                self.assertEqual(resposta.data, index)
+
+        for nome, (arquivo, _) in PAGINAS.items():
+            if nome == "inicio":
+                continue
+            self.assertIn(f'href="./{arquivo}"'.encode(), index)
+            for rota in (f"/{nome}", f"/{arquivo}"):
+                with self.subTest(rota=rota):
+                    resposta = self.client.get(rota)
+                    self.assertEqual(resposta.status_code, 200)
+                    self.assertIn(b'data-api="/api"', resposta.data)
+                    self.assertIn(b'src="/static/js/script.js"', resposta.data)
         with self.client.get("/static/css/style.css") as resposta:
             self.assertEqual(resposta.status_code, 200)
         self.assertEqual(self.client.head("/api/viagens").status_code, 200)
@@ -112,6 +122,7 @@ class TripPlanTest(unittest.TestCase):
     def test_demonstracao_carrega_exemplos_so_uma_vez(self):
         banco_demo = self.banco.with_name("demo.db")
         demo = create_app(banco_demo, demonstracao=True).test_client()
+        self.assertNotIn(b"aviso-demo", demo.get("/viagens").data)
         viagens = {viagem["id_viagem"]: viagem for viagem in demo.get("/api/viagens").json}
         self.assertEqual(viagens[1]["total_despesas"], 900)
         self.assertEqual(demo.delete("/api/despesas/1").status_code, 200)
@@ -122,11 +133,14 @@ class TripPlanTest(unittest.TestCase):
     def test_gera_site_para_o_subdiretorio_do_repositorio(self):
         saida = self.banco.parent / "site"
         gerar_pages(saida)
-        for arquivo, _ in PAGINAS.values():
+        self.assertEqual((saida / "index.html").read_bytes(), (RAIZ / "index.html").read_bytes())
+        for nome, (arquivo, _) in PAGINAS.items():
             with self.subTest(arquivo=arquivo):
                 pagina = (saida / arquivo).read_text(encoding="utf-8")
                 self.assertIn('href="./viagens.html"', pagina)
-                self.assertIn('src="./static/js/script.js"', pagina)
-                self.assertIn("data-demo", pagina)
+                self.assertNotIn("aviso-demo", pagina)
+                if nome != "inicio":
+                    self.assertIn('src="./static/js/script.js"', pagina)
+                    self.assertIn("data-demo", pagina)
         self.assertTrue((saida / "dados" / "demonstracao.json").is_file())
         self.assertTrue((saida / "static" / "js" / "pages.js").is_file())
