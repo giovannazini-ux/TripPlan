@@ -1,18 +1,12 @@
 
 import sqlite3
-import os
-
-CAMINHO_BANCO = os.path.join(
-    os.path.dirname(os.path.dirname(__file__)),
-    "database",
-    "tripplan.db"
-)
 
 class DespesaDAO:
+    def __init__(self):
+        self.caminho = "database/tripplan.db"
+
     def conectar(self):
-        conexao = sqlite3.connect(CAMINHO_BANCO)
-        conexao.execute("PRAGMA foreign_keys = ON")
-        return conexao
+        return sqlite3.connect(self.caminho)
 
     def criar_tabela(self):
         conexao = self.conectar()
@@ -37,8 +31,7 @@ class DespesaDAO:
         cursor = conexao.cursor()
 
         cursor.execute("""
-            INSERT INTO despesas
-            (id_viagem, descricao, categoria, valor)
+            INSERT INTO despesas (id_viagem, descricao, categoria, valor)
             VALUES (?, ?, ?, ?)
         """, (
             despesa.id_viagem,
@@ -52,18 +45,17 @@ class DespesaDAO:
 
     def listar(self):
         conexao = self.conectar()
+        conexao.row_factory = sqlite3.Row
         cursor = conexao.cursor()
 
         cursor.execute("""
-            SELECT despesas.id_despesa, despesas.descricao,
-                   despesas.categoria, despesas.valor,
-                   despesas.id_viagem, viagens.nome
+            SELECT despesas.*, viagens.nome AS nome_viagem
             FROM despesas
             INNER JOIN viagens
             ON despesas.id_viagem = viagens.id_viagem
+            ORDER BY despesas.id_despesa DESC
         """)
 
-        despesas = cursor.fetchall()
+        despesas = [dict(linha) for linha in cursor.fetchall()]
         conexao.close()
-
         return despesas
