@@ -41,6 +41,7 @@ header {
     font-family: 'Cormorant Garamond', serif;
     font-size: 32px;
     font-weight: 700;
+    text-decoration: none;
 }
 
 .logo span {
@@ -121,6 +122,21 @@ nav a.ativo {
 .botao-principal:hover {
     background: #314B64;
     transform: translateY(-2px);
+}
+
+.botao-principal:disabled {
+    opacity: 0.55;
+    cursor: default;
+    transform: none;
+}
+
+.aviso-demo {
+    padding: 12px 24px;
+    background: var(--champagne-claro);
+    color: var(--azul-escuro);
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.5;
 }
 
 .hero-visual {
@@ -314,10 +330,6 @@ form textarea {
     resize: vertical;
 }
 
-form button {
-    margin-top: 25px;
-}
-
 .formulario-linha {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -343,6 +355,7 @@ form button {
     border-radius: 8px;
     margin-bottom: 15px;
     box-shadow: 0 5px 15px rgba(25, 43, 61, 0.04);
+    overflow-wrap: anywhere;
 }
 
 .card-viagem h3 {
@@ -365,16 +378,50 @@ form button {
     color: var(--cinza);
 }
 
-.icone-vazio {
-    display: block;
-    font-size: 35px;
-    color: var(--champagne);
-    margin-bottom: 15px;
+.acoes-registro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
 }
 
-.vazio h3 {
+.botao-acao {
+    padding: 8px 12px;
+    border: 1px solid #D7CDDA;
+    border-radius: 5px;
+    background: white;
     color: var(--azul-escuro);
-    margin-bottom: 10px;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.botao-acao:hover {
+    background: var(--fundo);
+}
+
+.botao-excluir {
+    color: #9A2525;
+}
+
+.status-form:not(:empty) {
+    color: var(--azul-escuro);
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.status-form[data-erro]:not(:empty) {
+    color: #9A2525;
+}
+
+.status-form:empty {
+    margin: 0;
+}
+
+[hidden] {
+    display: none !important;
 }
 
 .explorar-container {

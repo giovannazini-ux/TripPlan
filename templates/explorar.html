@@ -1,26 +1,6 @@
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TripPlan | Explorar</title>
-    <link rel="stylesheet" href="/style/style.css">
-</head>
-<body>
-
-<header>
-    <div class="logo">Trip<span>Plan.</span></div>
-    <nav>
-        <a href="/">Início</a>
-        <a href="/explorar" class="ativo">Explorar</a>
-        <a href="/viagens">Minhas viagens</a>
-        <a href="/destinos">Destinos</a>
-        <a href="/passeios">Passeios</a>
-        <a href="/despesas">Despesas</a>
-    </nav>
-</header>
-
+{% block conteudo %}
 <main class="explorar-container">
 
     <section class="explorar-hero">
@@ -33,25 +13,25 @@
         <h2>Explore por categoria</h2>
 
         <div class="categorias-grid">
-            <button class="categoria-card" data-categoria="praias">
+            <button class="categoria-card" type="button" aria-pressed="false" data-categoria="praias">
                 <span>🏖️</span>
                 <h3>Praias</h3>
                 <p>Sol, mar e descanso.</p>
             </button>
 
-            <button class="categoria-card" data-categoria="natureza">
+            <button class="categoria-card" type="button" aria-pressed="false" data-categoria="natureza">
                 <span>🌿</span>
                 <h3>Natureza</h3>
                 <p>Paisagens e aventuras.</p>
             </button>
 
-            <button class="categoria-card" data-categoria="cultura">
+            <button class="categoria-card" type="button" aria-pressed="false" data-categoria="cultura">
                 <span>🏛️</span>
                 <h3>Cultura e história</h3>
                 <p>Lugares cheios de histórias.</p>
             </button>
 
-            <button class="categoria-card" data-categoria="cidades">
+            <button class="categoria-card" type="button" aria-pressed="false" data-categoria="cidades">
                 <span>🌆</span>
                 <h3>Grandes cidades</h3>
                 <p>Conheça novos estilos de vida.</p>
@@ -68,7 +48,7 @@
             <button id="surpreendaMe" class="botao-secundario">Surpreenda-me</button>
         </div>
 
-        <input type="text" id="pesquisaDestino" class="pesquisa-destino"
+        <input type="text" id="pesquisaDestino" aria-label="Pesquisar destinos" class="pesquisa-destino"
                placeholder="Pesquisar cidade ou país...">
 
         <button id="mostrarTodos" class="botao-filtro">Mostrar todos os destinos</button>
@@ -131,16 +111,8 @@
 
         </div>
 
-        <p id="mensagemDestino" class="mensagem-destino"></p>
+        <p id="mensagemDestino" class="mensagem-destino" role="status"></p>
     </section>
 
 </main>
-
-<footer>
-    <p>TripPlan — Organize suas viagens do seu jeito.</p>
-</footer>
-
-<script src="/script/script.js"></script>
-</body>
-</html>
- 
+{% endblock %}

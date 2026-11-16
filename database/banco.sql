@@ -1,41 +1,42 @@
-CREATE TABLE IF NOT EXISTS viagens (
-    id_viagens INT NOT NULL AUTO_INCREMENT,
-    nome TEXT NOT NULL,
-    descricao TEXT,
-    data_inicio DATE,
-    data_fim DATE,
-    PRIMARY KEY (id_viagens)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+PRAGMA foreign_keys = ON;
 
+BEGIN;
+
+CREATE TABLE IF NOT EXISTS viagens (
+    id_viagem INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    destino TEXT NOT NULL,
+    data_ida TEXT NOT NULL,
+    data_volta TEXT NOT NULL CHECK (data_volta >= data_ida),
+    orcamento REAL NOT NULL CHECK (orcamento > 0)
+);
 
 CREATE TABLE IF NOT EXISTS destinos (
-    id_destinos INT NOT NULL AUTO_INCREMENT,
-    id_viagens INT NOT NULL,
-    nome TEXT NOT NULL,
-    pais TEXT,
-    cidade TEXT,
-    PRIMARY KEY (id_destinos),
-    FOREIGN KEY (id_viagens) REFERENCES viagens(id_viagens)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+    id_destino INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_viagem INTEGER NOT NULL REFERENCES viagens(id_viagem),
+    cidade TEXT NOT NULL,
+    pais TEXT NOT NULL,
+    descricao TEXT
+);
 
 CREATE TABLE IF NOT EXISTS passeios (
-    id_passeios INT NOT NULL AUTO_INCREMENT,
-    id_destinos INT NOT NULL,
+    id_passeio INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_viagem INTEGER NOT NULL REFERENCES viagens(id_viagem),
     nome TEXT NOT NULL,
-    descricao TEXT,
-    data DATE,
-    PRIMARY KEY (id_passeios),
-    FOREIGN KEY (id_destinos) REFERENCES destinos(id_destinos)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+    data TEXT NOT NULL,
+    descricao TEXT
+);
 
 CREATE TABLE IF NOT EXISTS despesas (
-    id_despesas INT NOT NULL AUTO_INCREMENT,
-    id_viagens INT NOT NULL,
+    id_despesa INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_viagem INTEGER NOT NULL REFERENCES viagens(id_viagem),
     descricao TEXT NOT NULL,
-    valor DECIMAL(10,2) NOT NULL,
-    data DATE,
-    PRIMARY KEY (id_despesas),
-    FOREIGN KEY (id_viagens) REFERENCES viagens(id_viagens)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    categoria TEXT NOT NULL,
+    valor REAL NOT NULL CHECK (valor > 0)
+);
+
+CREATE INDEX IF NOT EXISTS destinos_por_viagem ON destinos(id_viagem);
+CREATE INDEX IF NOT EXISTS passeios_por_viagem ON passeios(id_viagem);
+CREATE INDEX IF NOT EXISTS despesas_por_viagem ON despesas(id_viagem);
+
+COMMIT;
